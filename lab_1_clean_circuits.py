@@ -41,12 +41,8 @@ def main():
     
     # Create the visualization with larger figure
     fig = plt.figure(figsize=(18, 12))
-    fig.suptitle('Lab 1: Quantum Computing with Qiskit - Complete Analysis', 
+    fig.suptitle('Qiskit Lab 1 Final Image', 
                  fontsize=18, fontweight='bold', y=0.95)
-    
-    # Add student info
-    fig.text(0.5, 0.91, 'Student: [Your Name] | Date: [Current Date] | Course: Quantum Computing Lab', 
-             ha='center', fontsize=12, style='italic')
     
     # Create grid layout: 3 rows, 3 columns
     gs = fig.add_gridspec(3, 3, height_ratios=[1, 1, 1.2], hspace=0.4, wspace=0.3)
@@ -165,18 +161,16 @@ c: 1/══════╩═
         ax9.text(bar.get_x() + bar.get_width()/2., height + 10,
                  f'{int(height)}', ha='center', va='bottom', fontweight='bold', fontsize=11)
     
-    # Add summary at bottom
+    # Add summary at bottom (keep only the observations)
     fig.text(0.5, 0.08, 'OBSERVATIONS: Basic Qubit (deterministic) | Superposition (random 50/50) | Bell State (entangled correlations)', 
              ha='center', fontsize=12, bbox=dict(boxstyle="round,pad=0.5", facecolor="lightyellow", edgecolor="orange"))
-    fig.text(0.5, 0.03, 'CONCLUSION: ✓ Quantum superposition demonstrated ✓ Quantum entanglement demonstrated ✓ Results match theory', 
-             ha='center', fontsize=12, fontweight='bold', color='darkgreen')
     
-    plt.savefig('lab1_clean_circuits.png', dpi=300, bbox_inches='tight', facecolor='white')
+    plt.savefig('qiskit_lab_1_final_image.png', dpi=300, bbox_inches='tight', facecolor='white')
     plt.show()
     
-    print("✓ Clean circuit visualization saved as 'lab1_clean_circuits.png'")
-    print("✓ All circuits are properly formatted and clearly visible")
-    print("✓ Perfect for screenshots and lab reports")
+    print("✓ Final image saved as 'qiskit_lab_1_final_image.png'")
+    print("✓ Clean layout without student info or conclusion text")
+    print("✓ Perfect for lab submission")
 
 if __name__ == "__main__":
     main()
