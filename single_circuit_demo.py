@@ -105,21 +105,21 @@ def simulate_and_visualize():
     circuit = create_bell_state_circuit()
     
     # Set up the visualization with cleaner layout
-    plt.style.use('dark_background')
+    plt.style.use('default')  # Use white background for better visibility
     fig = plt.figure(figsize=(18, 10))
     fig.suptitle('Bell State Circuit: Quantum Entanglement Explained', 
-                 fontsize=22, color='gold', fontweight='bold', y=0.95)
+                 fontsize=22, color='darkblue', fontweight='bold', y=0.95)
     
     # Circuit diagram - larger and centered
     ax1 = plt.subplot(2, 4, (1, 2))
     try:
         circuit.draw(output='mpl', ax=ax1, style='iqp')
-        ax1.set_title('Circuit Diagram', fontsize=16, color='cyan', pad=25)
+        ax1.set_title('Circuit Diagram', fontsize=16, color='darkgreen', pad=25)
     except:
         # Fallback to text representation
-        ax1.text(0.1, 0.5, str(circuit), fontsize=14, color='white', 
+        ax1.text(0.1, 0.5, str(circuit), fontsize=14, color='black', 
                 family='monospace', transform=ax1.transAxes)
-        ax1.set_title('Bell State Circuit', fontsize=16, color='cyan')
+        ax1.set_title('Bell State Circuit', fontsize=16, color='darkgreen')
         ax1.axis('off')
     
     # Simulate the circuit
@@ -130,9 +130,9 @@ def simulate_and_visualize():
     
     # Results histogram - larger
     ax2 = plt.subplot(2, 4, (3, 4))
-    plot_histogram(counts, ax=ax2, color=['#FFD700', '#00FFFF'], 
+    plot_histogram(counts, ax=ax2, color=['#FF6B6B', '#4ECDC4'], 
                    title='Measurement Results (1000 shots)')
-    ax2.set_title('Measurement Results (1000 shots)', fontsize=16, color='cyan', pad=25)
+    ax2.set_title('Measurement Results (1000 shots)', fontsize=16, color='darkgreen', pad=25)
     
     # Mathematical explanation - cleaner formatting
     ax3 = plt.subplot(2, 4, 5)
@@ -150,12 +150,12 @@ After CNOT:
 This is the Bell State!
 Perfect entanglement achieved.
     """
-    ax3.text(0.05, 0.95, math_text, fontsize=12, color='lightblue', 
+    ax3.text(0.05, 0.95, math_text, fontsize=12, color='darkblue', 
              transform=ax3.transAxes, verticalalignment='top', family='monospace')
     ax3.set_xlim(0, 1)
     ax3.set_ylim(0, 1)
     ax3.axis('off')
-    ax3.set_title('Mathematical Steps', fontsize=14, color='lightblue', pad=20)
+    ax3.set_title('Mathematical Steps', fontsize=14, color='darkblue', pad=20)
     
     # Step-by-step process - cleaner
     ax4 = plt.subplot(2, 4, 6)
@@ -176,12 +176,12 @@ Perfect entanglement achieved.
 
 Result: Perfect correlation!
     """
-    ax4.text(0.05, 0.95, steps_text, fontsize=12, color='lightgreen', 
+    ax4.text(0.05, 0.95, steps_text, fontsize=12, color='darkgreen', 
              transform=ax4.transAxes, verticalalignment='top', family='monospace')
     ax4.set_xlim(0, 1)
     ax4.set_ylim(0, 1)
     ax4.axis('off')
-    ax4.set_title('Physical Steps', fontsize=14, color='lightgreen', pad=20)
+    ax4.set_title('Physical Steps', fontsize=14, color='darkgreen', pad=20)
     
     # Key insights - organized
     ax5 = plt.subplot(2, 4, 7)
@@ -203,12 +203,12 @@ Result: Perfect correlation!
   Measuring one determines
   the other instantly
     """
-    ax5.text(0.05, 0.95, insights_text, fontsize=11, color='orange', 
+    ax5.text(0.05, 0.95, insights_text, fontsize=11, color='darkorange', 
              transform=ax5.transAxes, verticalalignment='top', family='monospace')
     ax5.set_xlim(0, 1)
     ax5.set_ylim(0, 1)
     ax5.axis('off')
-    ax5.set_title('Quantum Phenomena', fontsize=14, color='orange', pad=20)
+    ax5.set_title('Quantum Phenomena', fontsize=14, color='darkorange', pad=20)
     
     # Applications - organized
     ax6 = plt.subplot(2, 4, 8)
@@ -230,12 +230,17 @@ Result: Perfect correlation!
   Ultra-precise measurements
   Quantum metrology
     """
-    ax6.text(0.05, 0.95, apps_text, fontsize=11, color='pink', 
+    ax6.text(0.05, 0.95, apps_text, fontsize=11, color='purple', 
              transform=ax6.transAxes, verticalalignment='top', family='monospace')
     ax6.set_xlim(0, 1)
     ax6.set_ylim(0, 1)
     ax6.axis('off')
-    ax6.set_title('Real-World Uses', fontsize=14, color='pink', pad=20)
+    ax6.set_title('Real-World Uses', fontsize=14, color='purple', pad=20)
+    
+    plt.tight_layout()
+    plt.subplots_adjust(top=0.90)
+    plt.savefig('bell_state_explained.png', dpi=300, bbox_inches='tight', 
+                facecolor='white', edgecolor='none')
     
     plt.tight_layout()
     plt.subplots_adjust(top=0.90)
