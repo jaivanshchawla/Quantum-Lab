@@ -81,30 +81,52 @@ def main():
     print(f"Results: {clean_counts3}")
     print()
     
-    # Create comprehensive visualization
-    fig, ((ax1, ax2, ax3), (ax4, ax5, ax6)) = plt.subplots(2, 3, figsize=(15, 10))
-    fig.suptitle('Lab 1: Quantum Computing Results - Complete Analysis', fontsize=16, fontweight='bold')
+    # Create comprehensive visualization with tighter layout
+    fig, ((ax1, ax2, ax3), (ax4, ax5, ax6)) = plt.subplots(2, 3, figsize=(14, 8))
+    fig.suptitle('Lab 1: Quantum Computing Results - Complete Analysis', fontsize=16, fontweight='bold', y=0.98)
     
-    # Row 1: Circuit Diagrams
+    # Row 1: Circuit Diagrams with proper spacing
     # Circuit 1
-    ax1.text(0.5, 0.8, 'Basic Qubit |0⟩', ha='center', fontsize=12, fontweight='bold', transform=ax1.transAxes)
-    ax1.text(0.5, 0.5, '     ┌─┐\n  q: ┤M├\n     └╥┘\nc: 1/═╩═\n      0', 
-             ha='center', fontsize=10, fontfamily='monospace', transform=ax1.transAxes)
-    ax1.text(0.5, 0.1, f'Result: {counts1}', ha='center', fontsize=10, transform=ax1.transAxes)
+    ax1.text(0.5, 0.85, 'Basic Qubit |0⟩', ha='center', fontsize=12, fontweight='bold', transform=ax1.transAxes)
+    circuit1_text = """     ┌─┐
+  q: ┤M├
+     └╥┘
+c: 1/═╩═
+      0"""
+    ax1.text(0.5, 0.55, circuit1_text, ha='center', fontsize=9, fontfamily='monospace', 
+             transform=ax1.transAxes, bbox=dict(boxstyle="round,pad=0.3", facecolor="lightblue", alpha=0.3))
+    ax1.text(0.5, 0.15, f'Result: {counts1}', ha='center', fontsize=9, fontweight='bold', transform=ax1.transAxes)
+    ax1.set_xlim(0, 1)
+    ax1.set_ylim(0, 1)
     ax1.axis('off')
     
     # Circuit 2
-    ax2.text(0.5, 0.8, 'Superposition |+⟩', ha='center', fontsize=12, fontweight='bold', transform=ax2.transAxes)
-    ax2.text(0.5, 0.5, '     ┌───┐┌─┐\n  q: ┤ H ├┤M├\n     └───┘└╥┘\nc: 1/══════╩═\n           0', 
-             ha='center', fontsize=10, fontfamily='monospace', transform=ax2.transAxes)
-    ax2.text(0.5, 0.1, f'Result: {counts2}', ha='center', fontsize=10, transform=ax2.transAxes)
+    ax2.text(0.5, 0.85, 'Superposition |+⟩', ha='center', fontsize=12, fontweight='bold', transform=ax2.transAxes)
+    circuit2_text = """     ┌───┐┌─┐
+  q: ┤ H ├┤M├
+     └───┘└╥┘
+c: 1/══════╩═
+           0"""
+    ax2.text(0.5, 0.55, circuit2_text, ha='center', fontsize=9, fontfamily='monospace', 
+             transform=ax2.transAxes, bbox=dict(boxstyle="round,pad=0.3", facecolor="lightgreen", alpha=0.3))
+    ax2.text(0.5, 0.15, f'Result: {counts2}', ha='center', fontsize=9, fontweight='bold', transform=ax2.transAxes)
+    ax2.set_xlim(0, 1)
+    ax2.set_ylim(0, 1)
     ax2.axis('off')
     
     # Circuit 3
-    ax3.text(0.5, 0.9, 'Bell State |Φ+⟩', ha='center', fontsize=12, fontweight='bold', transform=ax3.transAxes)
-    ax3.text(0.5, 0.55, '        ┌───┐     \n   q_0: ┤ H ├──■──\n        └───┘┌─┴─┐\n   q_1: ─────┤ X ├\n             └───┘\n     measure_all()', 
-             ha='center', fontsize=9, fontfamily='monospace', transform=ax3.transAxes)
-    ax3.text(0.5, 0.1, f'Result: {clean_counts3}', ha='center', fontsize=10, transform=ax3.transAxes)
+    ax3.text(0.5, 0.85, 'Bell State |Φ+⟩', ha='center', fontsize=12, fontweight='bold', transform=ax3.transAxes)
+    circuit3_text = """        ┌───┐     
+   q_0: ┤ H ├──■──
+        └───┘┌─┴─┐
+   q_1: ─────┤ X ├
+             └───┘
+     measure_all()"""
+    ax3.text(0.5, 0.55, circuit3_text, ha='center', fontsize=8, fontfamily='monospace', 
+             transform=ax3.transAxes, bbox=dict(boxstyle="round,pad=0.3", facecolor="lightsalmon", alpha=0.3))
+    ax3.text(0.5, 0.15, f'Result: {clean_counts3}', ha='center', fontsize=9, fontweight='bold', transform=ax3.transAxes)
+    ax3.set_xlim(0, 1)
+    ax3.set_ylim(0, 1)
     ax3.axis('off')
     
     # Row 2: Bar Charts
@@ -139,7 +161,9 @@ def main():
                  f'{int(height)}', ha='center', va='bottom', fontweight='bold')
     
     plt.tight_layout()
-    plt.savefig('lab1_final_complete.png', dpi=300, bbox_inches='tight')
+    plt.subplots_adjust(hspace=0.4, wspace=0.3)
+    plt.savefig('lab1_final_complete.png', dpi=300, bbox_inches='tight', facecolor='white')
+    plt.show()
     print("✓ Final complete visualization saved as 'lab1_final_complete.png'")
     
     # Summary
