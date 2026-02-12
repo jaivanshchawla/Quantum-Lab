@@ -1,0 +1,164 @@
+============================================================
+ LAB 1: QUANTUM COMPUTING WITH QISKIT
+============================================================
+Student: [Your Name]
+Date: [Current Date]
+Course: Quantum Computing Laboratory
+
+============================================================
+ PART 1: BASIC QUBIT DEMONSTRATION
+============================================================
+
+Circuit Creation
+----------------
+Created quantum circuit with 1 qubit and 1 classical bit
+
+Initial Circuit:
+  q: 
+
+c: 1/
+
+Circuit with measurement:
+     ┌─┐
+  q: ┤M├
+     └╥┘
+c: 1/═╩═
+      0
+
+Execution and Analysis: Basic Qubit (|0⟩ state)
+-----------------------------------------------
+Executed 1024 shots on Aer simulator
+Measurement results: {'0': 1024}
+
+Probability Distribution:
+  |0⟩: 1024 counts (1.000 probability)
+
+State Vector Analysis: Initial |0⟩ State
+----------------------------------------
+Quantum State Vector:
+  |0⟩: 1.000+0.000j (probability: 1.000)
+
+============================================================
+ PART 2: SUPERPOSITION DEMONSTRATION
+============================================================
+
+Creating Superposition State
+----------------------------
+Applied Hadamard gate to create superposition |+⟩ = (|0⟩ + |1⟩)/√2
+
+Superposition Circuit:
+     ┌───┐┌─┐
+  q: ┤ H ├┤M├
+     └───┘└╥┘
+c: 1/══════╩═
+           0
+
+Execution and Analysis: Superposition State
+-------------------------------------------
+Executed 1024 shots on Aer simulator
+Measurement results: {'1': 517, '0': 507}
+
+Probability Distribution:
+  |1⟩:  517 counts (0.505 probability)
+  |0⟩:  507 counts (0.495 probability)
+
+State Vector Analysis: Superposition |+⟩ State
+----------------------------------------------
+Quantum State Vector:
+  |0⟩: 0.707+0.000j (probability: 0.500)
+  |1⟩: 0.707+0.000j (probability: 0.500)
+
+============================================================
+ PART 3: ENTANGLEMENT DEMONSTRATION
+============================================================
+
+Creating Bell State
+-------------------
+Created Bell state |Φ+⟩ = (|00⟩ + |11⟩)/√2
+Steps: H(q0) → CNOT(q0,q1) → Measure
+
+Entanglement Circuit:
+        ┌───┐      ░ ┌─┐   
+   q_0: ┤ H ├──■───░─┤M├───
+        └───┘┌─┴─┐ ░ └╥┘┌─┐
+   q_1: ─────┤ X ├─░──╫─┤M├
+             └───┘ ░  ║ └╥┘
+   c: 2/══════════════╬══╬═
+                      ║  ║
+meas: 2/══════════════╩══╩═
+                      0  1
+
+Execution and Analysis: Bell State (Entangled)
+----------------------------------------------
+Executed 1024 shots on Aer simulator
+Measurement results: {'00': 523, '11': 501}
+
+Probability Distribution:
+  |00⟩:  523 counts (0.511 probability)
+  |11⟩:  501 counts (0.489 probability)
+
+State Vector Analysis: Bell State |Φ+⟩
+--------------------------------------
+Quantum State Vector:
+  |00⟩: 0.707+0.000j (probability: 0.500)
+  |11⟩: 0.707+0.000j (probability: 0.500)
+
+============================================================
+ OBSERVATIONS AND RESULTS
+============================================================
+
+Theoretical vs Experimental Results
+-----------------------------------
+1. Basic Qubit |0⟩:
+   - Theoretical: 100% probability of measuring |0⟩
+   - Experimental: {'0': 1024}
+   - Verification: ✓ Matches expectation
+
+2. Superposition |+⟩ = (|0⟩ + |1⟩)/√2:
+   - Theoretical: 50% |0⟩, 50% |1⟩
+   - Experimental: {'1': 517, '0': 507}
+   - Measured probabilities: |0⟩=0.495, |1⟩=0.505
+   - Verification: ✓ Approximately equal distribution
+
+3. Bell State |Φ+⟩ = (|00⟩ + |11⟩)/√2:
+   - Theoretical: 50% |00⟩, 50% |11⟩, 0% |01⟩, 0% |10⟩
+   - Experimental: {'00': 523, '11': 501}
+   - |00⟩: 0.511, |11⟩: 0.489, |01⟩: 0.000, |10⟩: 0.000
+   - Verification: ✓ Only |00⟩ and |11⟩ observed (entanglement confirmed)
+
+============================================================
+ CONCLUSION
+============================================================
+✓ Successfully demonstrated qubit initialization
+✓ Successfully created and measured superposition states
+✓ Successfully created and verified entangled states
+✓ Experimental results match theoretical predictions
+✓ Qiskit framework successfully used for quantum circuit simulation
+
+Key Learning Outcomes:
+- Qubits can exist in superposition of |0⟩ and |1⟩ states
+- Hadamard gate creates equal superposition
+- CNOT gate can create entanglement between qubits
+- Measurement collapses quantum states to classical outcomes
+- Qiskit provides powerful tools for quantum circuit design and simulation
+
+============================================================
+ EXPERIMENT SUMMARY
+============================================================
+
+Procedure Followed:
+1. ✓ Import Qiskit libraries
+2. ✓ Create quantum and classical registers
+3. ✓ Apply required gates (H, CNOT)
+4. ✓ Execute using Aer simulator
+5. ✓ Analyze results using histogram/statevector
+
+Results Achieved:
+- Basic qubit measurement: 100% |0⟩ state
+- Superposition measurement: ~50% |0⟩, ~50% |1⟩
+- Entanglement measurement: ~50% |00⟩, ~50% |11⟩, 0% mixed states
+
+Theoretical Verification:
+All experimental results match quantum mechanical predictions within
+statistical uncertainty, confirming proper implementation of quantum
+circuits and understanding of quantum principles.
