@@ -39,10 +39,11 @@ def main():
         clean_key = key.split()[0] if ' ' in key else key
         clean_counts3[clean_key] = value
     
-    # Create the visualization with larger figure
-    fig = plt.figure(figsize=(18, 12))
+    # Create the visualization with larger figure and white background
+    plt.style.use('default')  # Use default style for white background
+    fig = plt.figure(figsize=(18, 12), facecolor='white')
     fig.suptitle('Qiskit Lab 1 Final Image', 
-                 fontsize=18, fontweight='bold', y=0.95)
+                 fontsize=18, fontweight='bold', y=0.95, color='black')
     
     # Create grid layout: 3 rows, 3 columns
     gs = fig.add_gridspec(3, 3, height_ratios=[1, 1, 1.2], hspace=0.4, wspace=0.3)
@@ -63,7 +64,8 @@ def main():
     ax9 = fig.add_subplot(gs[2, 2])
     
     # Circuit 1: Basic Qubit
-    ax1.text(0.5, 0.9, 'PART 1: Basic Qubit |0⟩', ha='center', fontsize=14, fontweight='bold', transform=ax1.transAxes)
+    ax1.text(0.5, 0.9, 'PART 1: Basic Qubit |0⟩', ha='center', fontsize=14, fontweight='bold', 
+             transform=ax1.transAxes, color='black')
     circuit1_box = patches.Rectangle((0.1, 0.2), 0.8, 0.6, linewidth=2, edgecolor='blue', facecolor='lightblue', alpha=0.3)
     ax1.add_patch(circuit1_box)
     circuit1_text = """     ┌─┐
@@ -72,13 +74,15 @@ def main():
 c: 1/═╩═
       0"""
     ax1.text(0.5, 0.5, circuit1_text, ha='center', va='center', fontsize=11, fontfamily='monospace', 
-             transform=ax1.transAxes, fontweight='bold')
+             transform=ax1.transAxes, fontweight='bold', color='black')
     ax1.set_xlim(0, 1)
     ax1.set_ylim(0, 1)
     ax1.axis('off')
+    ax1.set_facecolor('white')
     
     # Circuit 2: Superposition
-    ax2.text(0.5, 0.9, 'PART 2: Superposition |+⟩', ha='center', fontsize=14, fontweight='bold', transform=ax2.transAxes)
+    ax2.text(0.5, 0.9, 'PART 2: Superposition |+⟩', ha='center', fontsize=14, fontweight='bold', 
+             transform=ax2.transAxes, color='black')
     circuit2_box = patches.Rectangle((0.1, 0.2), 0.8, 0.6, linewidth=2, edgecolor='green', facecolor='lightgreen', alpha=0.3)
     ax2.add_patch(circuit2_box)
     circuit2_text = """     ┌───┐┌─┐
@@ -87,13 +91,15 @@ c: 1/═╩═
 c: 1/══════╩═
            0"""
     ax2.text(0.5, 0.5, circuit2_text, ha='center', va='center', fontsize=11, fontfamily='monospace', 
-             transform=ax2.transAxes, fontweight='bold')
+             transform=ax2.transAxes, fontweight='bold', color='black')
     ax2.set_xlim(0, 1)
     ax2.set_ylim(0, 1)
     ax2.axis('off')
+    ax2.set_facecolor('white')
     
     # Circuit 3: Bell State
-    ax3.text(0.5, 0.9, 'PART 3: Bell State |Φ+⟩', ha='center', fontsize=14, fontweight='bold', transform=ax3.transAxes)
+    ax3.text(0.5, 0.9, 'PART 3: Bell State |Φ+⟩', ha='center', fontsize=14, fontweight='bold', 
+             transform=ax3.transAxes, color='black')
     circuit3_box = patches.Rectangle((0.05, 0.15), 0.9, 0.7, linewidth=2, edgecolor='red', facecolor='lightsalmon', alpha=0.3)
     ax3.add_patch(circuit3_box)
     circuit3_text = """        ┌───┐     
@@ -103,29 +109,39 @@ c: 1/══════╩═
              └───┘
      measure_all()"""
     ax3.text(0.5, 0.5, circuit3_text, ha='center', va='center', fontsize=10, fontfamily='monospace', 
-             transform=ax3.transAxes, fontweight='bold')
+             transform=ax3.transAxes, fontweight='bold', color='black')
     ax3.set_xlim(0, 1)
     ax3.set_ylim(0, 1)
     ax3.axis('off')
+    ax3.set_facecolor('white')
     
     # Results Text
-    ax4.text(0.5, 0.7, 'RESULTS:', ha='center', fontsize=12, fontweight='bold', transform=ax4.transAxes)
+    ax4.text(0.5, 0.7, 'RESULTS:', ha='center', fontsize=12, fontweight='bold', 
+             transform=ax4.transAxes, color='black')
     ax4.text(0.5, 0.5, f'{counts1}', ha='center', fontsize=11, transform=ax4.transAxes, 
-             bbox=dict(boxstyle="round,pad=0.3", facecolor="lightblue", alpha=0.5))
-    ax4.text(0.5, 0.2, 'Always |0⟩\n(100% deterministic)', ha='center', fontsize=10, transform=ax4.transAxes)
+             bbox=dict(boxstyle="round,pad=0.3", facecolor="lightblue", alpha=0.5), color='black')
+    ax4.text(0.5, 0.2, 'Always |0⟩\n(100% deterministic)', ha='center', fontsize=10, 
+             transform=ax4.transAxes, color='black')
     ax4.axis('off')
+    ax4.set_facecolor('white')
     
-    ax5.text(0.5, 0.7, 'RESULTS:', ha='center', fontsize=12, fontweight='bold', transform=ax5.transAxes)
+    ax5.text(0.5, 0.7, 'RESULTS:', ha='center', fontsize=12, fontweight='bold', 
+             transform=ax5.transAxes, color='black')
     ax5.text(0.5, 0.5, f'{counts2}', ha='center', fontsize=11, transform=ax5.transAxes,
-             bbox=dict(boxstyle="round,pad=0.3", facecolor="lightgreen", alpha=0.5))
-    ax5.text(0.5, 0.2, '~50% |0⟩, ~50% |1⟩\n(Quantum superposition)', ha='center', fontsize=10, transform=ax5.transAxes)
+             bbox=dict(boxstyle="round,pad=0.3", facecolor="lightgreen", alpha=0.5), color='black')
+    ax5.text(0.5, 0.2, '~50% |0⟩, ~50% |1⟩\n(Quantum superposition)', ha='center', fontsize=10, 
+             transform=ax5.transAxes, color='black')
     ax5.axis('off')
+    ax5.set_facecolor('white')
     
-    ax6.text(0.5, 0.7, 'RESULTS:', ha='center', fontsize=12, fontweight='bold', transform=ax6.transAxes)
+    ax6.text(0.5, 0.7, 'RESULTS:', ha='center', fontsize=12, fontweight='bold', 
+             transform=ax6.transAxes, color='black')
     ax6.text(0.5, 0.5, f'{clean_counts3}', ha='center', fontsize=11, transform=ax6.transAxes,
-             bbox=dict(boxstyle="round,pad=0.3", facecolor="lightsalmon", alpha=0.5))
-    ax6.text(0.5, 0.2, 'Only |00⟩ and |11⟩\n(Quantum entanglement)', ha='center', fontsize=10, transform=ax6.transAxes)
+             bbox=dict(boxstyle="round,pad=0.3", facecolor="lightsalmon", alpha=0.5), color='black')
+    ax6.text(0.5, 0.2, 'Only |00⟩ and |11⟩\n(Quantum entanglement)', ha='center', fontsize=10, 
+             transform=ax6.transAxes, color='black')
     ax6.axis('off')
+    ax6.set_facecolor('white')
     
     # Bar Charts with enhanced styling
     # Bar chart 1

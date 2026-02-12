@@ -125,10 +125,10 @@ def main():
     
     # Create comprehensive visualization
     print("CREATING VISUALIZATION...")
-    fig = plt.figure(figsize=(20, 17))
+    fig = plt.figure(figsize=(20, 20))
     
-    # Create grid layout with proper spacing
-    gs = fig.add_gridspec(3, 4, height_ratios=[1.5, 1.5, 1.5], 
+    # Create grid layout with proper spacing - adding 4th row for statevectors
+    gs = fig.add_gridspec(4, 4, height_ratios=[1.5, 1.2, 1.5, 1.5], 
                          hspace=0.65, wspace=0.4,
                          top=0.92, bottom=0.08, left=0.06, right=0.97)
     
@@ -184,37 +184,59 @@ def main():
                bbox=dict(boxstyle='round,pad=0.4', facecolor=color, 
                         edgecolor='black', linewidth=1.5, alpha=0.5))
     
-    # Row 2: Circuit diagrams and statevector information
-    circuit_info = [
-        ("Initial |00⟩", "No gates", [1, 0, 0, 0]),
-        ("After H Gate", "H on qubit 0", sv2.data),
-        ("Bell State |Φ+⟩", "H + CNOT", sv3.data),
-        ("CNOT Operation", "Entanglement", sv3.data)
+    # Row 2: Circuit diagrams for each state
+    circuit_diagrams = [
+        ("Initial |00⟩", "     ┌─┐   \nq_0: ┤M├───\n     └╥┘┌─┐\nq_1: ─╫─┤M├\n      ║ └╥┘\nc: 2/═╩══╩═\n      0  1"),
+        ("After H Gate", "     ┌───┐┌─┐\nq_0: ┤ H ├┤M├\n     └┬─┬┘└╥┘\nq_1: ─┤M├──╫─\n      └╥┘  ║\nc: 2/══╩═══╩═\n       1   0"),
+        ("Bell State |Φ+⟩", "     ┌───┐     ┌─┐\nq_0: ┤ H ├──■──┤M├───\n     └───┘┌─┴─┐└╥┘┌─┐\nq_1: ─────┤ X ├─╫─┤M├\n          └───┘ ║ └╥┘\nc: 2/═══════════╩══╩═\n                0  1"),
+        ("Bell State (5000)", "     ┌───┐     ┌─┐\nq_0: ┤ H ├──■──┤M├───\n     └───┘┌─┴─┐└╥┘┌─┐\nq_1: ─────┤ X ├─╫─┤M├\n          └───┘ ║ └╥┘\nc: 2/═══════════╩══╩═\n                0  1")
     ]
     
-    for i, (title, desc, sv_data) in enumerate(circuit_info):
+    for i, (title, circuit) in enumerate(circuit_diagrams):
         ax = fig.add_subplot(gs[1, i])
         ax.axis('off')
         
-        # Create info box
-        info_text = f"{title}\n"
-        info_text += f"{desc}\n\n"
+        colors = ['#95a5a6', '#3498db', '#2ecc71', '#e74c3c']
+        
+        # Create circuit diagram box
+        ax.text(0.5, 0.5, circuit, ha='center', va='center',
+               fontsize=7.5, fontfamily='monospace', transform=ax.transAxes,
+               bbox=dict(boxstyle='round,pad=0.6', facecolor=colors[i],
+                        edgecolor='black', linewidth=2, alpha=0.3))
+        
+        ax.set_title(f"Circuit: {title}", fontweight='bold', fontsize=11, pad=20)
+    
+    # Row 3: Statevector information for each step
+    statevector_info = [
+        ("Step 1: Initial |00⟩", "No gates applied", [1, 0, 0, 0]),
+        ("Step 2: After H Gate", "H on qubit 0\n|ψ⟩ = (|00⟩ + |10⟩)/√2", sv2.data),
+        ("Step 3: Bell State |Φ+⟩", "H + CNOT gates\n|Φ+⟩ = (|00⟩ + |11⟩)/√2", sv3.data),
+        ("Step 4: Verification", "Same Bell state\nwith more shots", sv3.data)
+    ]
+    
+    for i, (title, desc, sv_data) in enumerate(statevector_info):
+        ax = fig.add_subplot(gs[2, i])
+        ax.axis('off')
+        
+        colors = ['#95a5a6', '#3498db', '#2ecc71', '#e74c3c']
+        
+        # Create info box with statevector
+        info_text = f"{desc}\n\n"
         info_text += f"Statevector:\n"
         for j, amp in enumerate(sv_data):
             if abs(amp) > 0.01:
                 info_text += f"|{j:02b}⟩: {amp.real:.3f}\n"
         
-        color = states_data[i][2]
         ax.text(0.5, 0.5, info_text, ha='center', va='center',
                fontsize=9, fontfamily='monospace', transform=ax.transAxes,
-               bbox=dict(boxstyle='round,pad=0.6', facecolor=color,
+               bbox=dict(boxstyle='round,pad=0.6', facecolor=colors[i],
                         edgecolor='black', linewidth=2, alpha=0.4))
         
-        ax.set_title(f"Step {i+1}: {title}", fontweight='bold', fontsize=11, pad=20)
+        ax.set_title(f"{title}", fontweight='bold', fontsize=11, pad=20)
     
-    # Row 3: Correlation analysis and verification
+    # Row 4: Correlation analysis and verification
     # Left plot: Correlation comparison
-    ax_corr = fig.add_subplot(gs[2, :2])
+    ax_corr = fig.add_subplot(gs[3, :2])
     
     state_names = ['Initial\n|00⟩', 'After H\n(Partial)', 'Bell State\n|Φ+⟩']
     correlations = []
@@ -246,7 +268,7 @@ def main():
     ax_corr.legend(fontsize=10, loc='upper left')
     
     # Right plot: Shot count verification
-    ax_verify = fig.add_subplot(gs[2, 2:])
+    ax_verify = fig.add_subplot(gs[3, 2:])
     
     shot_labels = [f'{sc}' for sc, _, _ in verification_results]
     corr_values = [corr for _, _, corr in verification_results]

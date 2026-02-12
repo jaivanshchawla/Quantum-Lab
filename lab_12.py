@@ -176,27 +176,27 @@ def main():
                bbox=dict(boxstyle='round,pad=0.4', facecolor=color, 
                         edgecolor='black', linewidth=1.5, alpha=0.5))
     
-    # Row 2: Algorithm explanation boxes
-    algo_explanations = [
-        ("Superposition", "H gates create equal\nsuperposition of all\nstates. No interference."),
-        ("Constant f(x)=0", "No oracle applied.\nConstructive interference\nreturns to |00⟩."),
-        ("Constant f(x)=1", "Z gates flip phase.\nInterference still\nreturns to |00⟩."),
-        ("Balanced Function", "CNOT creates correlation.\nDestructive interference\ngives non-|00⟩ states.")
+    # Row 2: Circuit diagrams for each algorithm
+    circuit_diagrams = [
+        ("Superposition", "        ┌───┐ ░ ┌─┐   \n   q_0: ┤ H ├─░─┤M├───\n        ├───┤ ░ └╥┘┌─┐\n   q_1: ┤ H ├─░──╫─┤M├\n        └───┘ ░  ║ └╥┘\n   c: 2/═════════╬══╬═\n                 ║  ║"),
+        ("Constant f(x)=0", "        ┌───┐┌───┐ ░ ┌─┐   \n   q_0: ┤ H ├┤ H ├─░─┤M├───\n        ├───┤├───┤ ░ └╥┘┌─┐\n   q_1: ┤ H ├┤ H ├─░──╫─┤M├\n        └───┘└───┘ ░  ║ └╥┘\n   c: 2/══════════════╬══╬═\n                      ║  ║"),
+        ("Constant f(x)=1", "        ┌───┐┌───┐┌───┐ ░ ┌─┐   \n   q_0: ┤ H ├┤ Z ├┤ H ├─░─┤M├───\n        ├───┤├───┤├───┤ ░ └╥┘┌─┐\n   q_1: ┤ H ├┤ Z ├┤ H ├─░──╫─┤M├\n        └───┘└───┘└───┘ ░  ║ └╥┘\n   c: 2/═══════════════════╬══╬═\n                           ║  ║"),
+        ("Balanced f(x)=x₀⊕x₁", "        ┌───┐     ┌───┐ ░ ┌─┐   \n   q_0: ┤ H ├──■──┤ H ├─░─┤M├───\n        ├───┤┌─┴─┐├───┤ ░ └╥┘┌─┐\n   q_1: ┤ H ├┤ X ├┤ H ├─░──╫─┤M├\n        └───┘└───┘└───┘ ░  ║ └╥┘\n   c: 2/═══════════════════╬══╬═\n                           ║  ║")
     ]
     
-    for i, (title, explanation) in enumerate(algo_explanations):
+    for i, (title, circuit) in enumerate(circuit_diagrams):
         ax = fig.add_subplot(gs[1, i])
         ax.axis('off')
         
-        color = algorithms_data[i][2]
+        colors = ['#9b59b6', '#2ecc71', '#3498db', '#e74c3c']
         
-        # Create explanation box
-        ax.text(0.5, 0.5, explanation, ha='center', va='center',
-               fontsize=10, transform=ax.transAxes,
-               bbox=dict(boxstyle='round,pad=0.8', facecolor=color,
-                        edgecolor='black', linewidth=2, alpha=0.4))
+        # Create circuit diagram box
+        ax.text(0.5, 0.5, circuit, ha='center', va='center',
+               fontsize=6.5, fontfamily='monospace', transform=ax.transAxes,
+               bbox=dict(boxstyle='round,pad=0.5', facecolor=colors[i],
+                        edgecolor='black', linewidth=2, alpha=0.3))
         
-        ax.set_title(f"{title}", fontweight='bold', fontsize=11, pad=20)
+        ax.set_title(f"Circuit: {title}", fontweight='bold', fontsize=11, pad=20)
     
     # Row 3: Comparison analysis
     # Left: Function type detection
